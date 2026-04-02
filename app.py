@@ -1244,9 +1244,10 @@ def render_explainability_screen() -> None:
         if gradcam is not None:
             st.image(gradcam, caption="Grad-CAM heatmap", width="stretch")
         else:
+            grad_status = "GradCAM imported OK" if GradCAM is not None else "GradCAM import FAILED"
             render_error_card(
                 "model",
-                "Grad-CAM is not available. Make sure grad-cam is installed and model.conv_head exists.",
+                f"Status: {grad_status}. gradcam_image={st.session_state.get('gradcam_image')}",
             )
 
     st.write(EXPLAINABILITY_TEXT_1)
@@ -1255,12 +1256,6 @@ def render_explainability_screen() -> None:
     if st.button("Back to results", key="explainability_back", width="stretch"):
         go_to("results")
         st.rerun()
-    else:
-            grad_status = "GradCAM imported OK" if GradCAM is not None else "GradCAM import FAILED"
-            render_error_card(
-                "model",
-                f"Grad-CAM is not available. Status: {grad_status}. gradcam_image={st.session_state.get('gradcam_image')}",
-            )
 
 def render_species_details_screen(species_df: pd.DataFrame, image_index: Dict[str, str]) -> None:
     render_top_nav("Species profile")
