@@ -789,11 +789,15 @@ def generate_gradcam(model: nn.Module, image_for_model: Image.Image) -> Optional
     if GradCAM is None or show_cam_on_image is None:
         return None
 
-    if not hasattr(model, "conv_head"):
+    if hasattr(model, "conv_head"):
+        target_layer = model.conv_head
+    elif hasattr(model, "blocks"):
+        target_layer = model.blocks[-1]
+    else:
         return None
 
     input_tensor = preprocess_for_model(image_for_model).to(DEVICE)
-    target_layers = [model.conv_head]
+    target_layers = [target_layer]
 
     with GradCAM(model=model, target_layers=target_layers) as cam:
         grayscale_cam = cam(input_tensor=input_tensor)[0]
