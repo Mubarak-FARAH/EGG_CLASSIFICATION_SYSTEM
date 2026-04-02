@@ -1161,6 +1161,8 @@ def render_processing_screen(paths: ProjectPaths, species_df: pd.DataFrame) -> N
         progress.progress(65)
         prediction = predict_with_model(model, image_for_model, species_df)
         gradcam_image = generate_gradcam(model, image_for_model)
+        print(f"gradcam_image result: {gradcam_image}")
+        print(f"GradCAM at processing time: {GradCAM}")
 
         status.write("Preparing results")
         progress.progress(100)
