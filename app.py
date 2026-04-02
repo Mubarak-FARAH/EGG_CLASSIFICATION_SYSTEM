@@ -787,7 +787,13 @@ def predict_with_model(model: nn.Module, image_for_model: Image.Image, species_d
 
 
 def generate_gradcam(model: nn.Module, image_for_model: Image.Image) -> Optional[Image.Image]:
+    print(f"GradCAM object: {GradCAM}")
+    print(f"model type: {type(model)}")
+    print(f"model has conv_head: {hasattr(model, 'conv_head')}")
+    print(f"model has blocks: {hasattr(model, 'blocks')}")
+    
     if GradCAM is None or show_cam_on_image is None:
+        print("GradCAM is None, returning")
         return None
 
     if hasattr(model, "conv_head"):
@@ -795,18 +801,21 @@ def generate_gradcam(model: nn.Module, image_for_model: Image.Image) -> Optional
     elif hasattr(model, "blocks"):
         target_layer = model.blocks[-1]
     else:
+        print("No valid target layer found")
         return None
 
-    input_tensor = preprocess_for_model(image_for_model).to(DEVICE)
-    target_layers = [target_layer]
-
-    with GradCAM(model=model, target_layers=target_layers) as cam:
-        grayscale_cam = cam(input_tensor=input_tensor)[0]
-
-    base_image = image_for_model.convert("RGB").resize((IMG_SIZE, IMG_SIZE))
-    base_array = np.asarray(base_image).astype(np.float32) / 255.0
-    cam_image = show_cam_on_image(base_array, grayscale_cam, use_rgb=True)
-    return Image.fromarray(cam_image)
+    try:
+        input_tensor = preprocess_for_model(image_for_model).to(DEVICE)
+        target_layers = [target_layer]
+        with GradCAM(model=model, target_layers=target_layers) as cam:
+            grayscale_cam = cam(input_tensor=input_tensor)[0]
+        base_image = image_for_model.convert("RGB").resize((IMG_SIZE, IMG_SIZE))
+        base_array = np.asarray(base_image).astype(np.float32) / 255.0
+        cam_image = show_cam_on_image(base_array, grayscale_cam, use_rgb=True)
+        return Image.fromarray(cam_image)
+    except Exception as e:
+        print(f"GradCAM execution error: {e}")
+        return None
 
 
 def format_confidence(value: float) -> str:
