@@ -1,0 +1,14 @@
+streamlit
+torch
+torchvision
+timm
+pandas
+openpyxl
+Pillow
+numpy
+grad-cam
+
+#rag / book chat
+pypdf
+PyPDF2
+moorcheh-sdk

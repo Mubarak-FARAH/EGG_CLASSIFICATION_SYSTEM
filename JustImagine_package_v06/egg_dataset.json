@@ -1,0 +1,372 @@
+[
+  {
+    "scientific_name": "Agelaius phoeniceus",
+    "common_name": "Red-winged Blackbird",
+    "attributes": {
+      "color": [
+        "blue"
+      ],
+      "pattern": [
+        "marbled",
+        "lined",
+        "blotched"
+      ],
+      "marking_color": [
+        "purple",
+        "black"
+      ],
+      "marking_intensity": "light",
+      "size": "medium"
+    }
+  },
+  {
+    "scientific_name": "Ammodramus savannarum",
+    "common_name": "Grasshopper Sparrow",
+    "attributes": {
+      "color": [
+        "white"
+      ],
+      "pattern": [
+        "spotted"
+      ],
+      "marking_color": [
+        "brown",
+        "red"
+      ],
+      "marking_intensity": "moderate",
+      "size": "small"
+    }
+  },
+  {
+    "scientific_name": "Anthus spinoletta",
+    "common_name": "Water Pipit",
+    "attributes": {
+      "color": [
+        "gray",
+        "white"
+      ],
+      "pattern": [],
+      "marking_color": [
+        "brown"
+      ],
+      "marking_intensity": "heavy",
+      "size": "medium"
+    }
+  },
+  {
+    "scientific_name": "Cardellina pusilla",
+    "common_name": "Wilson's Wrabler",
+    "attributes": {
+      "color": [
+        "white"
+      ],
+      "pattern": [
+        "speckled"
+      ],
+      "marking_color": [
+        "red",
+        "brown"
+      ],
+      "marking_intensity": "light",
+      "size": "small"
+    }
+  },
+  {
+    "scientific_name": "Certhia americana",
+    "common_name": "Brown Creeper",
+    "attributes": {
+      "color": [
+        "white",
+        "cream"
+      ],
+      "pattern": [
+        "speckled",
+        "spotted"
+      ],
+      "marking_color": [],
+      "marking_intensity": "moderate",
+      "size": "very_small"
+    }
+  },
+  {
+    "scientific_name": "Cistothorus palustris",
+    "common_name": "Long-billed Marsh Wren",
+    "attributes": {
+      "color": [
+        "white"
+      ],
+      "pattern": [],
+      "marking_color": [],
+      "marking_intensity": null,
+      "size": "very_small"
+    }
+  },
+  {
+    "scientific_name": "Euphagus cyanocephalus",
+    "common_name": "Brewer's Blackbird",
+    "attributes": {
+      "color": [
+        "blue",
+        "gray"
+      ],
+      "pattern": [
+        "blotched"
+      ],
+      "marking_color": [
+        "brown",
+        "purple"
+      ],
+      "marking_intensity": "moderate",
+      "size": "medium"
+    }
+  },
+  {
+    "scientific_name": "Geothlypis tolmiei",
+    "common_name": "MacGillivray's Warbler",
+    "attributes": {
+      "color": [
+        "white"
+      ],
+      "pattern": [
+        "spotted"
+      ],
+      "marking_color": [
+        "brown"
+      ],
+      "marking_intensity": "moderate",
+      "size": "small"
+    }
+  },
+  {
+    "scientific_name": "Geothlypis trichas",
+    "common_name": "Common Yellowthroat",
+    "attributes": {
+      "color": [
+        "white",
+        "cream"
+      ],
+      "pattern": [
+        "speckled"
+      ],
+      "marking_color": [
+        "brown",
+        "black"
+      ],
+      "marking_intensity": "moderate",
+      "size": "small"
+    }
+  },
+  {
+    "scientific_name": "Junco hyemalis",
+    "common_name": "Dark-eyed Junco",
+    "attributes": {
+      "color": [
+        "white"
+      ],
+      "pattern": [
+        "spotted"
+      ],
+      "marking_color": [
+        "brown"
+      ],
+      "marking_intensity": "light",
+      "size": "small"
+    }
+  },
+  {
+    "scientific_name": "lcteria virens",
+    "common_name": "Yellow-breasted Chat",
+    "attributes": {
+      "color": [
+        "white"
+      ],
+      "pattern": [
+        "spotted",
+        "speckled"
+      ],
+      "marking_color": [
+        "red",
+        "brown"
+      ],
+      "marking_intensity": "light",
+      "size": "medium"
+    }
+  },
+  {
+    "scientific_name": "Molothrus ater",
+    "common_name": "Brown-headed Cowbird",
+    "attributes": {
+      "color": [
+        "white",
+        "gray"
+      ],
+      "pattern": [],
+      "marking_color": [],
+      "marking_intensity": null,
+      "size": "medium"
+    }
+  },
+  {
+    "scientific_name": "Passer domesticus",
+    "common_name": "European House Sparrow(English Sparrow)",
+    "attributes": {
+      "color": [
+        "white"
+      ],
+      "pattern": [
+        "speckled"
+      ],
+      "marking_color": [
+        "brown",
+        "purple"
+      ],
+      "marking_intensity": "heavy",
+      "size": "medium"
+    }
+  },
+  {
+    "scientific_name": "Passerella iliaca",
+    "common_name": "Fox Sparrow",
+    "attributes": {
+      "color": [
+        "blue",
+        "green"
+      ],
+      "pattern": [
+        "spotted"
+      ],
+      "marking_color": [
+        "brown"
+      ],
+      "marking_intensity": "heavy",
+      "size": "medium"
+    }
+  },
+  {
+    "scientific_name": "Poecile atricapillus",
+    "common_name": "Black-capped Chickadee",
+    "attributes": {
+      "color": [
+        "white"
+      ],
+      "pattern": [
+        "speckled"
+      ],
+      "marking_color": [
+        "brown"
+      ],
+      "marking_intensity": "light",
+      "size": "very_small"
+    }
+  },
+  {
+    "scientific_name": "Pooecetes gramineus",
+    "common_name": "Vesper Sparrow",
+    "attributes": {
+      "color": [
+        "white",
+        "green"
+      ],
+      "pattern": [
+        "blotched",
+        "lined"
+      ],
+      "marking_color": [
+        "brown",
+        "red"
+      ],
+      "marking_intensity": "moderate",
+      "size": "small"
+    }
+  },
+  {
+    "scientific_name": "Quiscalus quiscula",
+    "common_name": "Common Grackle",
+    "attributes": {
+      "color": [
+        "blue",
+        "gray",
+        "white"
+      ],
+      "pattern": [
+        "lined"
+      ],
+      "marking_color": [
+        "black",
+        "brown"
+      ],
+      "marking_intensity": "light",
+      "size": "large"
+    }
+  },
+  {
+    "scientific_name": "Setophaga petechia",
+    "common_name": "Mangrove Yellow Warbler",
+    "attributes": {
+      "color": [
+        "white"
+      ],
+      "pattern": [
+        "streaked"
+      ],
+      "marking_color": [
+        "brown"
+      ],
+      "marking_intensity": "moderate",
+      "size": "small"
+    }
+  },
+  {
+    "scientific_name": "Setophaga ruticilla",
+    "common_name": "American Redstart",
+    "attributes": {
+      "color": [
+        "white",
+        "green"
+      ],
+      "pattern": [
+        "spotted",
+        "speckled"
+      ],
+      "marking_color": [
+        "brown"
+      ],
+      "marking_intensity": "light",
+      "size": "small"
+    }
+  },
+  {
+    "scientific_name": "Vireo olivaceus",
+    "common_name": "Red-eyed Vireo",
+    "attributes": {
+      "color": [
+        "white"
+      ],
+      "pattern": [
+        "spotted"
+      ],
+      "marking_color": [
+        "brown"
+      ],
+      "marking_intensity": "light",
+      "size": "small"
+    }
+  },
+  {
+    "scientific_name": "Zonotrichia albicollis",
+    "common_name": "White-throated Sparrow",
+    "attributes": {
+      "color": [
+        "white"
+      ],
+      "pattern": [
+        "spotted"
+      ],
+      "marking_color": [
+        "brown"
+      ],
+      "marking_intensity": "moderate",
+      "size": "small"
+    }
+  }
+]
