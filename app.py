@@ -412,14 +412,22 @@ def inject_css() -> None:
                 border-radius: 18px !important;
                 overflow: hidden !important;
             }
-
+            /* version badge */
+            .version-badge {
+                position: fixed;
+                bottom: 1rem;
+                left: 1rem;
+                font-size: 0.75rem;
+                color: rgba(49, 51, 63, 0.45);
+                z-index: 999;
+            }
         </style>
         """,
         unsafe_allow_html=True,
     )
     st.markdown(
         f'<div class="version-badge">v{APP_VERSION}</div>',
-    unsafe_allow_html=True,
+        unsafe_allow_html=True,
     )
 
 # =============================================================================
