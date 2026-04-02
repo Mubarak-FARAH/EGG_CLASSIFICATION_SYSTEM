@@ -1172,8 +1172,9 @@ def render_processing_screen(paths: ProjectPaths, species_df: pd.DataFrame) -> N
         st.rerun()
 
     except Exception as exc:
+        import traceback
         st.session_state.last_error = ("model", str(exc))
-        render_error_card("model", str(exc))
+        render_error_card("model", traceback.format_exc())
         if st.button("Try again", key="processing_try_again", width="stretch"):
             go_to("camera")
             st.rerun()
