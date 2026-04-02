@@ -712,8 +712,8 @@ def preprocess_for_model(pil_image: Image.Image) -> torch.Tensor:
 def draw_capture_guide(pil_image: Image.Image) -> Image.Image:
     image = pil_image.convert("RGB").copy()
     width, height = image.size
-    left = int((1 - CENTER_CROP_WIDTH_RATIO) * width / 2)
-    top = int((1 - CENTER_CROP_HEIGHT_RATIO) * height / 2)
+    left = int((1 - CENTER_CROP_WIDTH_RATIO) * width / 2) # type: ignore
+    top = int((1 - CENTER_CROP_HEIGHT_RATIO) * height / 2) # type: ignore
     right = width - left
     bottom = height - top
 
