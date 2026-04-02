@@ -66,7 +66,7 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 IMG_SIZE = 224
 HIGH_CONFIDENCE_THRESHOLD = 0.75
 TOP_K = 3
-
+APP_VERSION = "1.0.6"
 MODEL_FILENAME = "best_model.pth"
 MODEL_SCRIPT_FILENAME = "train_evaluate.py"
 SPECIES_FILENAME = "species_info.xlsx"
@@ -94,6 +94,7 @@ ABOUT_CONTENT = {
         "Eggcellent ID is a mobile-first prototype that supports bird egg identification using "
         "an EfficientNet-B0 image classification model and Grad-CAM visual explanation."
     ),
+    "app_version": APP_VERSION,
     "model_version": "EfficientNet-B0 classification model, 21 classes, input size 224x224.",
     "dataset_version": "Model-ready dataset used during training and validation.",
     "acknowledgements": (
