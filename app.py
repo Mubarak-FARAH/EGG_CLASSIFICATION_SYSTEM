@@ -419,7 +419,7 @@ def inject_css() -> None:
                 left: 1rem;
                 font-size: 0.75rem;
                 color: rgba(49, 51, 63, 0.45);
-                z-index: 999;
+                z-index: 9999;
             }
         </style>
         """,
