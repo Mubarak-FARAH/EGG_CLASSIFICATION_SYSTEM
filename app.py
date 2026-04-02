@@ -1141,7 +1141,7 @@ def render_processing_screen(paths: ProjectPaths, species_df: pd.DataFrame) -> N
     try:
         status.write("Loading model")
         progress.progress(35)
-        model = load_model(str(paths.model_weights), len(species_df))
+        model = load_model(str(paths.model_weights),num_classes=21)
 
         status.write("Running prediction")
         progress.progress(65)
