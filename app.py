@@ -95,7 +95,7 @@ ABOUT_CONTENT = {
         "an EfficientNet-B0 image classification model and Grad-CAM visual explanation."
     ),
     "app_version": APP_VERSION,
-    "model_version": "EfficientNet-B0 classification model, 21 classes, input size 224x224.",
+    "model_version": "EfficientNet-B0 classification model, 21 classes, input size 640x640.",
     "dataset_version": "Model-ready dataset used during training and validation.",
     "acknowledgements": (
         "Royal Alberta Museum, project collaborators, and supporting data and domain contributors."
