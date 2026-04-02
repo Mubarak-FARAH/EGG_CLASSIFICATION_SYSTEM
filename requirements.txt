@@ -1,3 +1,4 @@
+opencv-python-headless
 streamlit
 torch
 torchvision
@@ -7,7 +8,7 @@ openpyxl
 Pillow
 numpy
 grad-cam
-opencv-python-headless
+
 #rag / book chat
 pypdf
 PyPDF2
