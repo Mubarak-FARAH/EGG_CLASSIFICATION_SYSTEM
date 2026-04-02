@@ -22,9 +22,11 @@ from rag_utils import answer_book_question, build_book_index
 try:
     from pytorch_grad_cam import GradCAM
     from pytorch_grad_cam.utils.image import show_cam_on_image
-except Exception:
+except Exception as e:
     GradCAM = None
     show_cam_on_image = None
+    import streamlit as st
+    st.warning(f"GradCAM import error: {e}")
 
 import json
 
