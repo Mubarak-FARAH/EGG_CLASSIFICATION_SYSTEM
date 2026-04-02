@@ -25,7 +25,7 @@ try:
 except Exception as e:
     GradCAM = None
     show_cam_on_image = None
-    print(f"GradCAM import error: {e}"))
+    print(f"GradCAM import error: {e}")
 
 import json
 
