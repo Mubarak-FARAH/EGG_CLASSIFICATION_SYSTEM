@@ -417,6 +417,10 @@ def inject_css() -> None:
         """,
         unsafe_allow_html=True,
     )
+    st.markdown(
+        f'<div class="version-badge">v{APP_VERSION}</div>',
+    unsafe_allow_html=True,
+    )
 
 # =============================================================================
 # helpers
