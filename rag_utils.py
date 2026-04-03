@@ -34,7 +34,7 @@ except Exception:
 
 # The namespace name used to store the book in Moorcheh.
 # Change this if you want to use a different namespace per deployment.
-MOORCHEH_NAMESPACE = "eggcellent-book"
+MOORCHEH_NAMESPACE = "Eggcellent-Book"
 
 # How many chunks to retrieve before generating the answer.
 MOORCHEH_TOP_K = 5
