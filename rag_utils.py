@@ -34,7 +34,7 @@ except Exception:
 
 # The namespace name used to store the book in Moorcheh.
 # Change this if you want to use a different namespace per deployment.
-MOORCHEH_NAMESPACE = "Eggcellent-Book"
+MOORCHEH_NAMESPACE = "egg-nest-book"
 
 # How many chunks to retrieve before generating the answer.
 MOORCHEH_TOP_K = 5
@@ -102,7 +102,7 @@ def get_moorcheh_api_key(api_key: Optional[str] = None) -> str:
     )
 
 
-def _make_client(api_key: Optional[str] = None) -> "MoorchehClient":
+def _make_client(api_key: Optional[str] = None) -> "MoorchehClient": # type: ignore
     if MoorchehClient is None:
         raise ImportError(
             "moorcheh-sdk is not installed. Run: pip install moorcheh-sdk"
@@ -236,7 +236,7 @@ def build_book_chunks(
 # Moorcheh: namespace + document upload
 # ---------------------------------------------------------------------------
 
-def _namespace_exists(client: "MoorchehClient", namespace: str) -> bool:
+def _namespace_exists(client: "MoorchehClient", namespace: str) -> bool: # type: ignore
     """Return True if the namespace already exists in Moorcheh."""
     try:
         existing = client.namespaces.list()
