@@ -28,8 +28,14 @@ except Exception:
     SentenceTransformer = None
 
 
+<<<<<<< HEAD
 #keeping model name in one place in case you want to change it later
 DEFAULT_EMBEDDING_MODEL = "all-MiniLM-L6-v2"
+=======
+# The namespace name used to store the book in Moorcheh.
+# Change this if you want to use a different namespace per deployment.
+MOORCHEH_NAMESPACE = "egg-nest-book"
+>>>>>>> 44bc637aa98acb88a6fbed95e98040373096def2
 
 #keeping chunk sizes moderate so retrieval stays focused
 DEFAULT_CHUNK_SIZE = 900
@@ -56,6 +62,59 @@ class RetrievalResult:
     score: float
 
 
+<<<<<<< HEAD
+=======
+# ---------------------------------------------------------------------------
+# API key helpers
+# ---------------------------------------------------------------------------
+
+def get_moorcheh_api_key(api_key: Optional[str] = None) -> str:
+    """Return the Moorcheh API key.
+
+    Resolution order:
+      1. Explicit argument passed by the caller.
+      2. MOORCHEH_API_KEY environment variable.
+      3. Streamlit secrets (st.secrets["MOORCHEH_API_KEY"]) — only attempted
+         when running inside a Streamlit session.
+
+    Raises ValueError if no key is found.
+    """
+    if api_key:
+        return api_key
+
+    env_key = os.environ.get("MOORCHEH_API_KEY", "").strip()
+    if env_key:
+        return env_key
+
+    # Try Streamlit secrets without hard-importing streamlit at module level
+    try:
+        import streamlit as st
+        secret = st.secrets.get("MOORCHEH_API_KEY", "").strip()
+        if secret:
+            return secret
+    except Exception:
+        pass
+
+    raise ValueError(
+        "No Moorcheh API key found. "
+        "Set the MOORCHEH_API_KEY environment variable, add it to "
+        ".streamlit/secrets.toml, or pass it explicitly."
+    )
+
+
+def _make_client(api_key: Optional[str] = None) -> "MoorchehClient": # type: ignore
+    if MoorchehClient is None:
+        raise ImportError(
+            "moorcheh-sdk is not installed. Run: pip install moorcheh-sdk"
+        )
+    return MoorchehClient(api_key=get_moorcheh_api_key(api_key))
+
+
+# ---------------------------------------------------------------------------
+# PDF reading (unchanged from original)
+# ---------------------------------------------------------------------------
+
+>>>>>>> 44bc637aa98acb88a6fbed95e98040373096def2
 def normalize_whitespace(text: str) -> str:
     #cleaning repeated spaces and line breaks
     text = text.replace("\x00", " ")
@@ -198,7 +257,22 @@ def get_embedding_model(model_name: str = DEFAULT_EMBEDDING_MODEL) -> SentenceTr
             "sentence-transformers is not installed. Install it before using the book chat."
         )
 
+<<<<<<< HEAD
     return SentenceTransformer(model_name)
+=======
+def _namespace_exists(client: "MoorchehClient", namespace: str) -> bool: # type: ignore
+    """Return True if the namespace already exists in Moorcheh."""
+    try:
+        existing = client.namespaces.list()
+        # The SDK returns a list of namespace objects or dicts
+        names = [
+            (ns["name"] if isinstance(ns, dict) else ns.name)
+            for ns in existing
+        ]
+        return namespace in names
+    except Exception:
+        return False
+>>>>>>> 44bc637aa98acb88a6fbed95e98040373096def2
 
 
 def embed_texts(

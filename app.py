@@ -22,9 +22,10 @@ from rag_utils import answer_book_question, build_book_index
 try:
     from pytorch_grad_cam import GradCAM
     from pytorch_grad_cam.utils.image import show_cam_on_image
-except Exception:
+except Exception as e:
     GradCAM = None
     show_cam_on_image = None
+    print(f"GradCAM import error: {e}")
 
 import json
 
@@ -66,7 +67,11 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 IMG_SIZE = 224
 HIGH_CONFIDENCE_THRESHOLD = 0.75
 TOP_K = 3
+<<<<<<< HEAD
 APP_VERSION = "1.6.0"
+=======
+APP_VERSION = "1.0.6"
+>>>>>>> 44bc637aa98acb88a6fbed95e98040373096def2
 MODEL_FILENAME = "best_model.pth"
 MODEL_SCRIPT_FILENAME = "train_evaluate.py"
 SPECIES_FILENAME = "species_info.xlsx"
@@ -95,7 +100,11 @@ ABOUT_CONTENT = {
         "an EfficientNet-B0 image classification model and Grad-CAM visual explanation."
     ),
     "app_version": APP_VERSION,
+<<<<<<< HEAD
     "model_version": "EfficientNet-B0 classification model, 21 classes, input size 224x224.",
+=======
+    "model_version": "EfficientNet-B0 classification model, 21 classes, input size 640x640.",
+>>>>>>> 44bc637aa98acb88a6fbed95e98040373096def2
     "dataset_version": "Model-ready dataset used during training and validation.",
     "acknowledgements": (
         "Royal Alberta Museum, project collaborators, and supporting data and domain contributors."
@@ -412,9 +421,21 @@ def inject_css() -> None:
                 border-radius: 18px !important;
                 overflow: hidden !important;
             }
-
+            /* version badge */
+            .version-badge {
+                position: fixed;
+                bottom: 1rem;
+                left: 1rem;
+                font-size: 0.75rem;
+                color: rgba(49, 51, 63, 0.45);
+                z-index: 9999;
+            }
         </style>
         """,
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        f'<div class="version-badge">v{APP_VERSION}</div>',
         unsafe_allow_html=True,
     )
 
@@ -712,8 +733,8 @@ def preprocess_for_model(pil_image: Image.Image) -> torch.Tensor:
 def draw_capture_guide(pil_image: Image.Image) -> Image.Image:
     image = pil_image.convert("RGB").copy()
     width, height = image.size
-    left = int((1 - CENTER_CROP_WIDTH_RATIO) * width / 2)
-    top = int((1 - CENTER_CROP_HEIGHT_RATIO) * height / 2)
+    left = int((1 - CENTER_CROP_WIDTH_RATIO) * width / 2) # type: ignore
+    top = int((1 - CENTER_CROP_HEIGHT_RATIO) * height / 2) # type: ignore
     right = width - left
     bottom = height - top
 
@@ -774,22 +795,35 @@ def predict_with_model(model: nn.Module, image_for_model: Image.Image, species_d
 
 
 def generate_gradcam(model: nn.Module, image_for_model: Image.Image) -> Optional[Image.Image]:
+    print(f"GradCAM object: {GradCAM}")
+    print(f"model type: {type(model)}")
+    print(f"model has conv_head: {hasattr(model, 'conv_head')}")
+    print(f"model has blocks: {hasattr(model, 'blocks')}")
+    
     if GradCAM is None or show_cam_on_image is None:
+        print("GradCAM is None, returning")
         return None
 
-    if not hasattr(model, "conv_head"):
+    if hasattr(model, "conv_head"):
+        target_layer = model.conv_head
+    elif hasattr(model, "blocks"):
+        target_layer = model.blocks[-1]
+    else:
+        print("No valid target layer found")
         return None
 
-    input_tensor = preprocess_for_model(image_for_model).to(DEVICE)
-    target_layers = [model.conv_head]
-
-    with GradCAM(model=model, target_layers=target_layers) as cam:
-        grayscale_cam = cam(input_tensor=input_tensor)[0]
-
-    base_image = image_for_model.convert("RGB").resize((IMG_SIZE, IMG_SIZE))
-    base_array = np.asarray(base_image).astype(np.float32) / 255.0
-    cam_image = show_cam_on_image(base_array, grayscale_cam, use_rgb=True)
-    return Image.fromarray(cam_image)
+    try:
+        input_tensor = preprocess_for_model(image_for_model).to(DEVICE)
+        target_layers = [target_layer]
+        with GradCAM(model=model, target_layers=target_layers) as cam:
+            grayscale_cam = cam(input_tensor=input_tensor)[0]
+        base_image = image_for_model.convert("RGB").resize((IMG_SIZE, IMG_SIZE))
+        base_array = np.asarray(base_image).astype(np.float32) / 255.0
+        cam_image = show_cam_on_image(base_array, grayscale_cam, use_rgb=True)
+        return Image.fromarray(cam_image)
+    except Exception as e:
+        print(f"GradCAM execution error: {e}")
+        return None
 
 
 def format_confidence(value: float) -> str:
@@ -1129,12 +1163,14 @@ def render_processing_screen(paths: ProjectPaths, species_df: pd.DataFrame) -> N
     try:
         status.write("Loading model")
         progress.progress(35)
-        model = load_model(str(paths.model_weights), len(species_df))
+        model = load_model(str(paths.model_weights),num_classes=21)
 
         status.write("Running prediction")
         progress.progress(65)
         prediction = predict_with_model(model, image_for_model, species_df)
         gradcam_image = generate_gradcam(model, image_for_model)
+        print(f"gradcam_image result: {gradcam_image}")
+        print(f"GradCAM at processing time: {GradCAM}")
 
         status.write("Preparing results")
         progress.progress(100)
@@ -1146,8 +1182,9 @@ def render_processing_screen(paths: ProjectPaths, species_df: pd.DataFrame) -> N
         st.rerun()
 
     except Exception as exc:
+        import traceback
         st.session_state.last_error = ("model", str(exc))
-        render_error_card("model", str(exc))
+        render_error_card("model", traceback.format_exc())
         if st.button("Try again", key="processing_try_again", width="stretch"):
             go_to("camera")
             st.rerun()
@@ -1228,9 +1265,10 @@ def render_explainability_screen() -> None:
         if gradcam is not None:
             st.image(gradcam, caption="Grad-CAM heatmap", width="stretch")
         else:
+            grad_status = "GradCAM imported OK" if GradCAM is not None else "GradCAM import FAILED"
             render_error_card(
                 "model",
-                "Grad-CAM is not available. Make sure grad-cam is installed and model.conv_head exists.",
+                f"Status: {grad_status}. gradcam_image={st.session_state.get('gradcam_image')}",
             )
 
     st.write(EXPLAINABILITY_TEXT_1)
@@ -1239,7 +1277,6 @@ def render_explainability_screen() -> None:
     if st.button("Back to results", key="explainability_back", width="stretch"):
         go_to("results")
         st.rerun()
-
 
 def render_species_details_screen(species_df: pd.DataFrame, image_index: Dict[str, str]) -> None:
     render_top_nav("Species profile")
