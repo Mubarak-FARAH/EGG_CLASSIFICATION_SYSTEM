@@ -67,11 +67,8 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 IMG_SIZE = 224
 HIGH_CONFIDENCE_THRESHOLD = 0.75
 TOP_K = 3
-<<<<<<< HEAD
 APP_VERSION = "1.6.0"
-=======
 APP_VERSION = "1.0.6"
->>>>>>> 44bc637aa98acb88a6fbed95e98040373096def2
 MODEL_FILENAME = "best_model.pth"
 MODEL_SCRIPT_FILENAME = "train_evaluate.py"
 SPECIES_FILENAME = "species_info.xlsx"
@@ -100,11 +97,8 @@ ABOUT_CONTENT = {
         "an EfficientNet-B0 image classification model and Grad-CAM visual explanation."
     ),
     "app_version": APP_VERSION,
-<<<<<<< HEAD
     "model_version": "EfficientNet-B0 classification model, 21 classes, input size 224x224.",
-=======
     "model_version": "EfficientNet-B0 classification model, 21 classes, input size 640x640.",
->>>>>>> 44bc637aa98acb88a6fbed95e98040373096def2
     "dataset_version": "Model-ready dataset used during training and validation.",
     "acknowledgements": (
         "Royal Alberta Museum, project collaborators, and supporting data and domain contributors."
