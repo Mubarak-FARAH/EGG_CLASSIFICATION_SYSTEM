@@ -8,7 +8,7 @@ openpyxl
 Pillow
 numpy
 grad-cam
-
+sentence-transformers
 #rag / book chat
 pypdf
 PyPDF2
