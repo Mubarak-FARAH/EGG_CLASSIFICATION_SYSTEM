@@ -28,14 +28,13 @@ except Exception:
     SentenceTransformer = None
 
 
-<<<<<<< HEAD
+
 #keeping model name in one place in case you want to change it later
 DEFAULT_EMBEDDING_MODEL = "all-MiniLM-L6-v2"
 =======
 # The namespace name used to store the book in Moorcheh.
 # Change this if you want to use a different namespace per deployment.
 MOORCHEH_NAMESPACE = "egg-nest-book"
->>>>>>> 44bc637aa98acb88a6fbed95e98040373096def2
 
 #keeping chunk sizes moderate so retrieval stays focused
 DEFAULT_CHUNK_SIZE = 900
@@ -62,8 +61,7 @@ class RetrievalResult:
     score: float
 
 
-<<<<<<< HEAD
-=======
+
 # ---------------------------------------------------------------------------
 # API key helpers
 # ---------------------------------------------------------------------------
@@ -257,9 +255,9 @@ def get_embedding_model(model_name: str = DEFAULT_EMBEDDING_MODEL) -> SentenceTr
             "sentence-transformers is not installed. Install it before using the book chat."
         )
 
-<<<<<<< HEAD
+
     return SentenceTransformer(model_name)
-=======
+
 def _namespace_exists(client: "MoorchehClient", namespace: str) -> bool: # type: ignore
     """Return True if the namespace already exists in Moorcheh."""
     try:
@@ -272,7 +270,6 @@ def _namespace_exists(client: "MoorchehClient", namespace: str) -> bool: # type:
         return namespace in names
     except Exception:
         return False
->>>>>>> 44bc637aa98acb88a6fbed95e98040373096def2
 
 
 def embed_texts(
