@@ -31,7 +31,6 @@ except Exception:
 
 #keeping model name in one place in case you want to change it later
 DEFAULT_EMBEDDING_MODEL = "all-MiniLM-L6-v2"
-=======
 # The namespace name used to store the book in Moorcheh.
 # Change this if you want to use a different namespace per deployment.
 MOORCHEH_NAMESPACE = "egg-nest-book"
