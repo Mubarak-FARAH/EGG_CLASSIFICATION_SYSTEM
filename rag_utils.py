@@ -112,7 +112,6 @@ def _make_client(api_key: Optional[str] = None) -> "MoorchehClient": # type: ign
 # PDF reading (unchanged from original)
 # ---------------------------------------------------------------------------
 
->>>>>>> 44bc637aa98acb88a6fbed95e98040373096def2
 def normalize_whitespace(text: str) -> str:
     #cleaning repeated spaces and line breaks
     text = text.replace("\x00", " ")
