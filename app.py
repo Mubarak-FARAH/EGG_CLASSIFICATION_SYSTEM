@@ -949,6 +949,27 @@ def render_home_screen() -> None:
 
     st.write("")
 
+    # --- NEW: Upload image card ---
+    with st.container(border=True):
+        st.markdown("<div class='home-card-wrap'>", unsafe_allow_html=True)
+        st.markdown(
+            "<div class='home-icon-wrap'><span>upload</span></div>",
+            unsafe_allow_html=True,
+        )
+        st.markdown("<div class='home-card-title'>Upload image</div>", unsafe_allow_html=True)
+        st.markdown(
+            "<div class='home-card-text'>Upload an existing photo of an egg from your device.</div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Upload image", key="home_upload_image", width="stretch"):
+            reset_scan_state()
+            st.session_state.history = []  #clearing previous navigation
+            go_to("upload")
+            st.rerun()
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    st.write("")
+
     with st.container(border=True):
         st.markdown("<div class='home-card-wrap'>", unsafe_allow_html=True)
         st.markdown(
@@ -1543,6 +1564,52 @@ def render_book_chat_screen(paths: ProjectPaths) -> None:
             st.rerun()
 
 
+# =============================================================================
+# NEW: upload screen
+# =============================================================================
+
+def render_upload_screen() -> None:
+    render_top_nav("Upload an egg image")
+
+    st.write(
+        "Select a photo of a single egg from your device. "
+        "The image will be cropped to a centered square before processing."
+    )
+
+    uploaded_file = st.file_uploader(
+        "Choose an image",
+        type=["jpg", "jpeg", "png", "webp"],
+        key="egg_uploader",
+        label_visibility="collapsed",
+    )
+
+    if uploaded_file is not None:
+        try:
+            pil_image = Image.open(uploaded_file).convert("RGB")
+            square_image = crop_to_center_square(pil_image)
+            validate_input_image(square_image)
+
+            st.image(square_image, caption="Preview — image will be cropped to this square", use_container_width=True)
+
+            c1, c2 = st.columns(2)
+
+            with c1:
+                if st.button("Choose a different image", key="upload_choose_different", width="stretch"):
+                    # Clearing the uploader state by rerunning — Streamlit will reset the widget
+                    st.rerun()
+
+            with c2:
+                if st.button("Process this image", key="upload_process", width="stretch"):
+                    st.session_state.captured_image = square_image
+                    st.session_state.image_for_model = square_image
+                    go_to("processing")
+                    st.rerun()
+
+        except StreamlitFriendlyError as exc:
+            render_error_card(exc.category, exc.details)
+        except Exception as exc:
+            render_error_card("camera", str(exc))
+
 
 def crop_to_center_square(pil_image: Image.Image) -> Image.Image:
     #cropping to a centered square to keep the model input safe from distortion
@@ -1625,6 +1692,8 @@ def main() -> None:
         render_manual_results_screen(species_df, image_index)
     elif screen == "book_chat":
         render_book_chat_screen(paths)
+    elif screen == "upload":                         # NEW
+        render_upload_screen()                       # NEW
     elif screen == "error_states":
         render_error_states_screen()
     elif screen == "about":
