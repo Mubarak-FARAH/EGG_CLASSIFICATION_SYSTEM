@@ -2,7 +2,6 @@
 
 **Team Just Imagine** | NorQuest College — Faculty of Business, Environment and Technology  
 **Course:** CMPT 3835: Machine Learning Work Integrated Project II  
-**Instructor:** Palwasha Afsar  
 **Team Members:** David Barahona, Paula Frossard, Mubarak Farah, Jewel Gonzalez  
 **Date:** March 15, 2026
 
